@@ -1,0 +1,130 @@
+/* adm/adm.css */
+body {
+  max-width: 600px;
+  transform: scale(1.5);
+  transform-origin: top center;
+}
+
+input, textarea, select, button {
+  font-size: 16px;
+  padding: 5px;
+  width: 100%;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  width: auto;
+  margin-top: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Barra admin */
+.admin-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+
+.admin-status{
+  flex: 1 1 100%;
+  font-size: 12px;
+  color:#333;
+  margin-top:6px;
+  padding:6px 8px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  background:#fafafa;
+}
+
+.hidden{ display:none; }
+
+/* Caducidad + checkbox premium */
+.caducidad-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+#fechaCaducidad {
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  width: 100%;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+#fechaCaducidad:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  outline: none;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  accent-color: #4a90e2;
+  cursor: pointer;
+  transition: transform 0.15s;
+  flex: 0 0 auto;
+}
+
+.checkbox-container input[type="checkbox"]:hover {
+  transform: scale(1.08);
+}
+
+.checkbox-container span {
+  font-size: 0.85em;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.checkbox-container:hover span {
+  color: #000;
+}
+
+/* Vigencia premium */
+#fechaVigencia {
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  width: 100%;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+#fechaVigencia:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  outline: none;
+}
+
+/* Caja info */
+#infoOrden {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
+}

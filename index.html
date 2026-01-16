@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Operativos WSP</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+<script>
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on("init", user => {
+      if (user) {
+        // Si ya está logueado, ir al ADM
+        window.location.href = "/adm/index.html";
+      }
+    });
+
+    netlifyIdentity.on("login", () => {
+      window.location.href = "/adm/index.html";
+    });
+
+    netlifyIdentity.on("recovery", () => {
+      // después del reset de contraseña
+      window.location.href = "/adm/index.html";
+    });
+  }
+</script>
+
+<p>Cargando…</p>
+</body>
+</html>

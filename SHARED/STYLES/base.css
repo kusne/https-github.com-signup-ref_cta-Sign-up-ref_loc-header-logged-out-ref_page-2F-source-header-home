@@ -1,0 +1,68 @@
+/* shared/styles/base.css */
+body {
+  font-family: Arial;
+  padding: 10px;
+  margin: auto;
+  max-width: 480px;
+  transform: scale(1.9);
+  transform-origin: top center;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+
+.section {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 14px auto;
+  max-width: 420px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.hidden { display: none; }
+
+input[type="checkbox"] {
+  transform: scale(1.6);
+  margin-right: 8px;
+}
+
+select {
+  font-size: 18px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="number"], textarea {
+  font-size: 18px;
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.obligatorio { border: 2px solid #c62828; }
+/* shared/styles/base.css */
+body {
+  font-family: Arial;
+  padding: 10px;
+  margin: auto;
+  max-width: 700px;
+  box-sizing: border-box;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+.hidden { display: none; }

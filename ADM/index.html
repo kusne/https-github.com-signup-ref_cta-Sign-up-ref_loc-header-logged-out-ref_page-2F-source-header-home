@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carga de Órdenes Operacionales</title>
+
+  <link rel="stylesheet" href="../shared/styles/base.css" />
+  <link rel="stylesheet" href="./adm.css" />
+
+</head>
+
+<body>
+  <h2>Formulario de Carga de Órdenes Operacionales</h2>
+
+  <label for="numOrden">Número de Orden</label>
+  <input type="text" id="numOrden" placeholder="Ej: OOP2344/26" required>
+
+  <label for="textoRef">Texto de Referencia (opcional)</label>
+  <input type="text" id="textoRef" placeholder="Ej: Orden semanal">
+
+  <label for="fechaVigencia">Fecha de Vigencia (obligatoria)</label>
+  <input type="date" id="fechaVigencia" required>
+
+  <label for="franjas">Franjas horarias (una por línea: HORARIO - LUGAR - TÍTULO)</label>
+  <textarea id="franjas" rows="6" required
+    placeholder="01 a 06 hs - Puente Carretero Cabecera Santo Tomé - Presencia Activa
+01 a 03 hs - RN168 KM18 - Control Vehicular"></textarea>
+
+  <div class="caducidad-container">
+    <label for="fechaCaducidad">Fecha de Caducidad (obligatoria)</label>
+    <input type="text" id="fechaCaducidad" required placeholder="DD/MM/AAAA o A FINALIZAR">
+
+    <div class="checkbox-row">
+      <label class="checkbox-container" for="aFinalizarCheckbox">
+        <input type="checkbox" id="aFinalizarCheckbox">
+        <span>Marcar como A FINALIZAR</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Botones principales (alineados a la derecha/izquierda según tu CSS) -->
+  <div style="display:flex; gap:10px; align-items:center;">
+    <button type="button" onclick="agregarOrden()">
+      Agregar / Actualizar Orden
+    </button>
+
+    <button type="button" onclick="publicarOrdenes()"
+      style="background:#2e7d32; color:white; font-weight:bold;">
+      Publicar órdenes
+    </button>
+  </div>
+
+  <hr>
+
+  <h3>Órdenes Cargadas</h3>
+  <select id="ordenExistente" size="6" onchange="mostrarOrdenSeleccionada()"></select>
+  <button type="button" onclick="eliminarOrden()">Eliminar Orden Seleccionada</button>
+
+  <div id="infoOrden"></div>
+
+  <hr>
+
+  <h3>Exportar / Importar Órdenes</h3>
+
+  <label for="exportBox">Exportar órdenes (copiar y enviar por WhatsApp)</label>
+  <textarea id="exportBox" rows="6" readonly></textarea>
+  <button type="button" onclick="exportarOrdenes()">Exportar</button>
+
+  <label for="importBox">Importar órdenes (pegar aquí)</label>
+  <textarea id="importBox" rows="6"></textarea>
+  <button type="button" onclick="importarOrdenes()">Importar</button>
+  
+  
+  <!-- Shared scripts (orden importante) -->
+  <script src="../shared/js/storage.js"></script>
+  <script src="../shared/js/dates.js"></script>
+  <script src="../shared/js/ordersSync.js"></script>
+  <script src="../shared/js/deletions.js"></script>
+  <script src="../shared/js/caducidadFinalizar.js"></script>
+  <script src="../shared/js/ordersExport.js"></script>
+
+  
+ 
+  <script src="./adm.js"></script>
+
+ 
+  
+</body>
+</html>
