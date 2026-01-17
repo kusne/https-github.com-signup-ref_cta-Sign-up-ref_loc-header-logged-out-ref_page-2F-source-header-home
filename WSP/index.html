@@ -11,12 +11,11 @@
 </head>
 
 <body>
-  <!-- CONTENEDOR GENERAL PARA UI -->
   <div class="app">
 
     <h3>Informe Operativo</h3>
 
-    <label>
+    <label class="check">
       <input type="checkbox" id="toggleCarga">
       Mostrar carga de órdenes
     </label>
@@ -44,67 +43,85 @@
       <option value="">Seleccionar horario</option>
     </select>
 
+    <!-- PERSONAL -->
     <div class="section obligatorio" id="bloquePersonal">
       <label>Personal Policial</label>
-      <input type="checkbox" class="personal" value="Subinspector Mariaux A."> Subinspector Mariaux<br>
-      <input type="checkbox" class="personal" value="Oficial Cardozo A."> Oficial Cardozo<br>
-      <input type="checkbox" class="personal" value="Suboficial Pintos J."> Suboficial Pintos J.<br>
-      <input type="checkbox" class="personal" value="Suboficial Aquino F."> Suboficial Aquino F.<br>
-      <input type="checkbox" class="personal" value="Suboficial Lascurain I."> Suboficial Lascurain I<br>
-      <input type="checkbox" class="personal" value="Suboficial Delgado Y."> Suboficial Delgado Y.
+
+      <label class="check"><input type="checkbox" class="personal" value="Subinspector Mariaux A.">Subinspector Mariaux</label>
+      <label class="check"><input type="checkbox" class="personal" value="Oficial Cardozo A.">Oficial Cardozo</label>
+      <label class="check"><input type="checkbox" class="personal" value="Suboficial Pintos J.">Suboficial Pintos J.</label>
+      <label class="check"><input type="checkbox" class="personal" value="Suboficial Aquino F.">Suboficial Aquino F.</label>
+      <label class="check"><input type="checkbox" class="personal" value="Suboficial Lascurain I.">Suboficial Lascurain I.</label>
+      <label class="check"><input type="checkbox" class="personal" value="Suboficial Delgado Y.">Suboficial Delgado Y.</label>
     </div>
 
+    <!-- MOVILES -->
     <div class="section obligatorio" id="bloqueMovil">
       <label>Móviles</label>
-      <input type="checkbox" class="movil" value="12428"> 12428<br>
-      <input type="checkbox" class="movil" value="10139"> 10139<br>
-      <input type="checkbox" class="movil" value="12502"> 12502
+
+      <label class="check"><input type="checkbox" class="movil" value="12428">12428</label>
+      <label class="check"><input type="checkbox" class="movil" value="10139">10139</label>
+      <label class="check"><input type="checkbox" class="movil" value="12502">12502</label>
     </div>
 
+    <!-- ESCOPETA -->
     <div class="section">
       <label>ESCOPETA</label>
-      <input type="checkbox" class="ESCOPETA" value="N°650370"> N°650370<br>
-      <input type="checkbox" class="ESCOPETA" value="N°650380"> N°650380
+
+      <label class="check"><input type="checkbox" class="ESCOPETA" value="N°650370">N°650370</label>
+      <label class="check"><input type="checkbox" class="ESCOPETA" value="N°650380">N°650380</label>
     </div>
 
+    <!-- HT -->
     <div class="section">
       <label>HT</label>
-      <input type="checkbox" class="HT" value="N°02"> N°02<br>
-      <input type="checkbox" class="HT" value="N°06"> N°06<br>
-      <input type="checkbox" class="HT" value="N°08"> N°08<br>
-      <input type="checkbox" class="HT" value="N°V03"> N°V03
+
+      <label class="check"><input type="checkbox" class="HT" value="N°02">N°02</label>
+      <label class="check"><input type="checkbox" class="HT" value="N°06">N°06</label>
+      <label class="check"><input type="checkbox" class="HT" value="N°08">N°08</label>
+      <label class="check"><input type="checkbox" class="HT" value="N°V03">N°V03</label>
     </div>
 
+    <!-- PDA -->
     <div class="section">
       <label>PDA</label>
-      <input type="checkbox" class="PDA" value="05"> 05<br>
-      <input type="checkbox" class="PDA" value="19"> 19<br>
-      <input type="checkbox" class="PDA" value="67"> 67<br>
-      <input type="checkbox" class="PDA" value="68"> 68
+
+      <label class="check"><input type="checkbox" class="PDA" value="05">05</label>
+      <label class="check"><input type="checkbox" class="PDA" value="19">19</label>
+      <label class="check"><input type="checkbox" class="PDA" value="67">67</label>
+      <label class="check"><input type="checkbox" class="PDA" value="68">68</label>
     </div>
 
+    <!-- IMPRESORA -->
     <div class="section">
       <label>IMPRESORA</label>
-      <input type="checkbox" class="IMPRESORA" value="N°05"> N°05<br>
-      <input type="checkbox" class="IMPRESORA" value="N°39"> N°39
+
+      <label class="check"><input type="checkbox" class="IMPRESORA" value="N°05">N°05</label>
+      <label class="check"><input type="checkbox" class="IMPRESORA" value="N°39">N°39</label>
     </div>
 
+    <!-- ALOMETRO -->
     <div class="section">
       <label>Alómetro</label>
-      <input type="checkbox" class="Alometro" value="AREC-0127"> AREC-0127<br>
-      <input type="checkbox" class="Alometro" value="ARTL-0425"> ARTL-0425<br>
-      <input type="checkbox" class="Alometro" value="ARSA-0360"> ARSA-0360
+
+      <label class="check"><input type="checkbox" class="Alometro" value="AREC-0127">AREC-0127</label>
+      <label class="check"><input type="checkbox" class="Alometro" value="ARTL-0425">ARTL-0425</label>
+      <label class="check"><input type="checkbox" class="Alometro" value="ARSA-0360">ARSA-0360</label>
     </div>
 
+    <!-- ALCOHOLIMETRO -->
     <div class="section">
       <label>Alcoholímetro</label>
-      <input type="checkbox" class="Alcoholimetro" value="AREC-0732"> AREC-0732<br>
-      <input type="checkbox" class="Alcoholimetro" value="ARSH-0149"> ARSH-0149<br>
-      <input type="checkbox" class="Alcoholimetro" value="ARLM-0652"> ARLM-0652
+
+      <label class="check"><input type="checkbox" class="Alcoholimetro" value="AREC-0732">AREC-0732</label>
+      <label class="check"><input type="checkbox" class="Alcoholimetro" value="ARSH-0149">ARSH-0149</label>
+      <label class="check"><input type="checkbox" class="Alcoholimetro" value="ARLM-0652">ARLM-0652</label>
     </div>
 
+    <!-- FINALIZA -->
     <div id="finaliza" class="section hidden">
       <label>Resultados</label>
+
       Vehículos fiscalizados: <input type="number" id="vehiculos"><br>
       Personas identificadas: <input type="number" id="personas"><br>
       Test de Alómetro: <input type="number" id="testalom"><br>
@@ -115,6 +132,7 @@
       Requisas: <input type="number" id="Requisa"><br>
       QRZ: <input type="number" id="qrz"><br>
       Dominio: <input type="number" id="dominio"><br>
+
       <label>Medidas Cautelares:</label>
       Remisión: <input type="number" id="Remision"><br>
       Retención: <input type="number" id="Retencion"><br>
@@ -145,5 +163,3 @@
   <script src="./wsp.js"></script>
 </body>
 </html>
-
-
