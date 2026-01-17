@@ -220,6 +220,10 @@ Retención: (${retencion})
 Prohibición de circulación: (${prohibicion})
 Cesión de conducción: (${cesion})
 
+const detallesTexto = document.getElementById("detalles")?.value?.trim();
+const bloqueDetalles = detallesTexto
+  ? `Detalles:
+${detallesTexto}
 `;
   }
 
@@ -241,6 +245,8 @@ ${seleccion("personal")}
 Móviles: ${seleccionLinea("movil", "/")}
 
 ${bloqueResultados}
+${bloqueDetalles}
+    
 Observaciones:
 ${document.getElementById("obs")?.value || "Sin novedad"}
 
@@ -267,6 +273,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
