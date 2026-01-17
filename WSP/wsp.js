@@ -40,12 +40,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       if (!r.ok) return false;
 
       const data = await r.json();
-      if (!Array.isArray(data) || !data[0]?.payload) return false;
+      if (!data?.length || !data[0]?.payload?.ordenes) return false;
 
-      const payload = data[0].payload;
-      const ordenes = Array.isArray(payload.ordenes) ? payload.ordenes : [];
-
-      StorageApp.guardarOrdenes(ordenes);
+      StorageApp.guardarOrdenes(data[0].payload.ordenes);
       return true;
 
     } catch {
@@ -249,6 +246,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
