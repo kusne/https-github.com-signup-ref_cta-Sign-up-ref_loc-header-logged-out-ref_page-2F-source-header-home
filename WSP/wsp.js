@@ -250,8 +250,5 @@ Se adjunta vista fotográfica`;
   })();
 })();
 
-    await syncOrdenesDesdeServidor();
-    cargarOrdenesDisponibles();
-  })();
-})();
+
 
