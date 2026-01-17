@@ -1,4 +1,4 @@
-// ===== CONFIG SUPABASE (SOLO LECTURA WSP) =====  
+// ===== CONFIG SUPABASE (SOLO LECTURA WSP) ===== 
 const SUPABASE_URL = "https://ugeydxozfewzhldjbkat.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
@@ -23,7 +23,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   let franjaSeleccionada = null;
 
   // ======================================================
-  // ===== LECTURA DESDE SUPABASE (CORRECTA) ==============
+  // ===== LECTURA DESDE SUPABASE (FUENTE REAL) ============
   // ======================================================
   async function syncOrdenesDesdeServidor() {
     try {
@@ -40,8 +40,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       if (!r.ok) return false;
 
       const data = await r.json();
-      
       if (!Array.isArray(data) || !Array.isArray(data[0]?.payload)) return false;
+
       StorageApp.guardarOrdenes(data[0].payload);
       return true;
 
@@ -158,7 +158,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     divDetalles.classList.toggle("hidden", !fin);
   }
 
-  // ===== util =====
+  // ======================================================
+  // ===== FUNCIONES QUE FALTABAN (CLAVE) =================
+  // ======================================================
   function seleccion(clase) {
     return Array.from(document.querySelectorAll("." + clase + ":checked"))
       .map(e => e.value)
@@ -172,38 +174,53 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   }
 
   // ===== ENVIAR A WHATSAPP =====
-  function enviar() {
-    if (!ordenSeleccionada || !franjaSeleccionada) return;
+function enviar() {
+  if (!ordenSeleccionada || !franjaSeleccionada) return;
 
-    const fecha = new Date().toLocaleDateString("es-AR");
+  const fecha = new Date().toLocaleDateString("es-AR");
 
-    let bloqueResultados = "";
+  let bloqueResultados = "";
 
-    if (selTipo.value === "FINALIZA") {
-      const g = id => document.getElementById(id)?.value || 0;
+  // ⬇️ SOLO si es FINALIZA agregamos los numerales
+  if (selTipo.value === "FINALIZA") {
+    const vehiculos = document.getElementById("vehiculos")?.value || 0;
+    const personas = document.getElementById("personas")?.value || 0;
+    const testalom = document.getElementById("testalom")?.value || 0;
+    const alco = document.getElementById("Alcotest")?.value || 0;
+    const posSan = document.getElementById("positivaSancionable")?.value || 0;
+    const posNo = document.getElementById("positivaNoSancionable")?.value || 0;
+    const actas = document.getElementById("actas")?.value || 0;
+    const requisa = document.getElementById("Requisa")?.value || 0;
+    const qrz = document.getElementById("qrz")?.value || 0;
+    const dominio = document.getElementById("dominio")?.value || 0;
 
-      bloqueResultados =
+    const remision = document.getElementById("Remision")?.value || 0;
+    const retencion = document.getElementById("Retencion")?.value || 0;
+    const prohibicion = document.getElementById("Prohibicion")?.value || 0;
+    const cesion = document.getElementById("Cesion")?.value || 0;
+
+    bloqueResultados =
 `Resultados:
-Vehículos fiscalizados: (${g("vehiculos")})
-Personas identificadas: (${g("personas")})
-Test de Alómetro: (${g("testalom")})
-Test de Alcoholímetro: (${g("Alcotest")})
-Positiva sancionable: (${g("positivaSancionable")})
-Positiva no sancionable: (${g("positivaNoSancionable")})
-Actas labradas: (${g("actas")})
-Requisas: (${g("Requisa")})
-QRZ: (${g("qrz")})
-Dominio: (${g("dominio")})
+Vehículos fiscalizados: (${vehiculos})
+Personas identificadas: (${personas})
+Test de Alómetro: (${testalom})
+Test de Alcoholímetro: (${alco})
+Positiva sancionable: (${posSan})
+Positiva no sancionable: (${posNo})
+Actas labradas: (${actas})
+Requisas: (${requisa})
+QRZ: (${qrz})
+Dominio: (${dominio})
 Medidas cautelares:
-Remisión: (${g("Remision")})
-Retención: (${g("Retencion")})
-Prohibición de circulación: (${g("Prohibicion")})
-Cesión de conducción: (${g("Cesion")})
+Remisión: (${remision})
+Retención: (${retencion})
+Prohibición de circulación: (${prohibicion})
+Cesión de conducción: (${cesion})
 
 `;
-    }
+  }
 
-    const texto =
+  const texto =
 `POLICÍA DE LA PROVINCIA DE SANTA FE - GUARDIA PROVINCIAL
 BRIGADA MOTORIZADA CENTRO NORTE
 
@@ -226,9 +243,10 @@ ${document.getElementById("obs")?.value || "Sin novedad"}
 
 Se adjunta vista fotográfica`;
 
-    window.location.href =
-      "https://wa.me/?text=" + encodeURIComponent(texto);
-  }
+  window.location.href =
+    "https://wa.me/?text=" + encodeURIComponent(texto);
+}
+
 
   // ===== Eventos =====
   elToggleCarga.addEventListener("change", toggleCargaOrdenes);
@@ -246,6 +264,8 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
+
 
 
 
