@@ -1,110 +1,131 @@
-/* adm/adm.css */
+/* =========================
+   ADM UI LIMPIA Y ESTABLE
+   ========================= */
 
-/* ===== Reset visual básico ===== */
 * {
   box-sizing: border-box;
 }
 
-/* ===== Layout general ===== */
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #f4f6f8;
+  background: #f2f2f2;
+  color: #111;
 }
 
-/* ===== Contenedor centrado ===== */
-body > * {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+/* ===== CONTENEDOR CENTRAL ===== */
+.app,
+.container,
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  background: #ffffff;
 }
 
-/* ===== Títulos ===== */
-h2, h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+/* ===== TITULOS ===== */
+h1, h2, h3 {
   text-align: center;
+  margin: 12px 0 20px;
 }
 
-/* ===== Inputs generales ===== */
-input,
+/* ===== SECCIONES ===== */
+.section {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+  background: #fafafa;
+}
+
+/* ===== LABELS ===== */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* ===== INPUTS ===== */
+input[type="text"],
+input[type="date"],
 textarea,
 select {
   width: 100%;
-  padding: 8px 10px;
-  font-size: 16px;
-  margin-top: 5px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-}
-
-/* ===== Botones ===== */
-button {
-  padding: 10px 14px;
+  padding: 8px;
   font-size: 15px;
-  cursor: pointer;
-  border-radius: 6px;
-  border: none;
+  margin-bottom: 12px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
 }
 
-button + button {
-  margin-left: 10px;
+/* ===== TEXTAREA ===== */
+textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
-/* ===== Secciones ===== */
-.section {
-  margin-top: 14px;
+/* ===== CHECKBOX GRUPOS ===== */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checkbox-group label {
+  font-weight: normal;
+}
+
+/* ===== BOTONES ===== */
+button {
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  font-size: 16px;
+  border: none;
   border-radius: 6px;
-  background: #fff;
+  cursor: pointer;
+  background: #1976d2;
+  color: #fff;
 }
 
-/* ===== Ocultos ===== */
+button:hover {
+  background: #125aa0;
+}
+
+/* ===== BOTONES SECUNDARIOS ===== */
+button.secondary {
+  background: #555;
+}
+
+button.secondary:hover {
+  background: #333;
+}
+
+/* ===== SELECT ORDEN EXISTENTE ===== */
+#ordenExistente {
+  width: 100%;
+  min-height: 140px;
+}
+
+/* ===== INFO ORDEN ===== */
+#infoOrden {
+  font-size: 14px;
+  background: #eee;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* ===== FINALIZAR ===== */
 .hidden {
   display: none;
 }
 
-/* ===== Caducidad ===== */
-.caducidad-container {
-  margin-top: 10px;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .app,
+  .container,
+  main {
+    padding: 12px;
+  }
 }
 
-/* ===== Checkbox FINALIZAR ===== */
-.checkbox-row {
-  margin-top: 6px;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.checkbox-container input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.checkbox-container span {
-  font-size: 14px;
-  color: #444;
-}
-
-/* ===== Selector de órdenes ===== */
-#ordenExistente {
-  width: 100%;
-  min-height: 120px;
-  margin-top: 6px;
-}
-
-/* ===== Info orden ===== */
-#infoOrden {
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fafafa;
-}
