@@ -201,7 +201,13 @@ function enviar() {
     const retencion = document.getElementById("Retencion")?.value || 0;
     const prohibicion = document.getElementById("Prohibicion")?.value || 0;
     const cesion = document.getElementById("Cesion")?.value || 0;
-
+    const detallesTexto = document.getElementById("detalles")?.value?.trim();
+    const bloqueDetalles = detallesTexto
+      ? `Detalles:
+    ${detallesTexto}
+    `
+      : "";
+    
     bloqueResultados =
 `Resultados:
 Vehículos fiscalizados: (${vehiculos})
@@ -220,10 +226,6 @@ Retención: (${retencion})
 Prohibición de circulación: (${prohibicion})
 Cesión de conducción: (${cesion})
 
-const detallesTexto = document.getElementById("detalles")?.value?.trim();
-const bloqueDetalles = detallesTexto
-  ? `Detalles:
-${detallesTexto}
 `;
   }
 
@@ -273,6 +275,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
