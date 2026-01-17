@@ -26,29 +26,32 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   // ===== LECTURA DESDE SUPABASE (FUENTE REAL) ============
   // ======================================================
   async function syncOrdenesDesdeServidor() {
-    try {
-      const r = await fetch(
-        `${SUPABASE_URL}/rest/v1/ordenes_store?select=payload&order=updated_at.desc&limit=1`,
-        {
-          headers: {
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: "Bearer " + SUPABASE_ANON_KEY
-          }
+  try {
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/ordenes_store?select=payload&order=updated_at.desc&limit=1`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: "Bearer " + SUPABASE_ANON_KEY
         }
-      );
+      }
+    );
 
-      if (!r.ok) return false;
+    if (!r.ok) return false;
 
-      const data = await r.json();
-      if (!Array.isArray(data) || !Array.isArray(data[0]?.payload)) return false;
+    const data = await r.json();
+    if (!Array.isArray(data) || !Array.isArray(data[0]?.payload)) return false;
 
-      StorageApp.guardarOrdenes(data[0].payload);
-      return true;
+    // ✅ payload ES el array de órdenes
+    StorageApp.guardarOrdenes(data[0].payload);
+    return true;
 
-    } catch {
-      return false;
-    }
+  } catch (e) {
+    console.error("Error leyendo Supabase:", e);
+    return false;
   }
+}
+
 
   // ===== UI =====
   function toggleCargaOrdenes() {
@@ -264,6 +267,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
