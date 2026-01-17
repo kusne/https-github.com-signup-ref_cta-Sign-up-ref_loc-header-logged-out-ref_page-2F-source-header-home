@@ -39,17 +39,13 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
       if (!r.ok) return false;
 
-      const rows = await r.json();
-      if (!Array.isArray(rows) || rows.length === 0) return false;
-      const payload = rows[0].payload;
-      if (!Array.isArray(payload)) return false;
-      // payload ES el array de órdenes
-      StorageApp.guardarOrdenes(payload);
+      const data = await r.json();
       
+      if (!Array.isArray(data) || !Array.isArray(data[0]?.payload)) return false;
+      StorageApp.guardarOrdenes(data[0].payload);
       return true;
 
     } catch {
-      console.error("Error leyendo Supabase:", e);
       return false;
     }
   }
@@ -250,6 +246,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
