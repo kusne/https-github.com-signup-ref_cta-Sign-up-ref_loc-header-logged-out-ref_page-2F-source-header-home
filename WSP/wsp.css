@@ -1,43 +1,87 @@
 /* wsp/wsp.css */
-body {
-  max-width: 480px;
-  transform: scale(1.9);
-  transform-origin: top center;
+
+/* ===== RESET BÁSICO ===== */
+* {
+  box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f5f5;
+}
+
+/* ===== CONTENEDOR GENERAL ===== */
+body {
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== APP ===== */
+.app {
+  width: 100%;
+  max-width: 480px;
+  padding: 12px;
+  background: #ffffff;
+}
+
+/* ===== SECCIONES ===== */
 .section {
   border: 1px solid #ccc;
-  padding: 10px;
-  margin: 14px auto;
-  max-width: 420px;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 6px;
 }
 
+/* ===== BOTONES ===== */
 button {
+  width: 100%;
   margin-top: 15px;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: white;
 }
 
+button:active {
+  opacity: 0.9;
+}
+
+/* ===== CHECKBOX ===== */
 input[type="checkbox"] {
-  transform: scale(1.6);
+  transform: scale(1.3);
   margin-right: 8px;
 }
 
+/* ===== SELECTS ===== */
 select {
-  font-size: 18px;
-  padding: 8px;
+  font-size: 16px;
+  padding: 10px;
   width: 100%;
-  box-sizing: border-box;
+  margin-top: 6px;
 }
 
-input[type="number"], textarea {
-  font-size: 18px;
-  padding: 6px;
+/* ===== INPUTS ===== */
+input[type="number"],
+textarea {
+  font-size: 16px;
+  padding: 10px;
   width: 100%;
-  box-sizing: border-box;
+  margin-top: 6px;
 }
 
-.obligatorio { border: 2px solid #c62828; }
+/* ===== OBLIGATORIO ===== */
+.obligatorio {
+  border: 2px solid #c62828;
+}
 
-.section.hidden { display: none; }
+/* ===== OCULTOS ===== */
+.section.hidden {
+  display: none;
+}
+
