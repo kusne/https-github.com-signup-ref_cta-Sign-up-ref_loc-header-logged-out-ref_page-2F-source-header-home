@@ -26,7 +26,30 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     });
   }
 
-  // ===== Util UI =====
+  // ======================================================
+  // ===== EVENTO SELECT ORDEN (SOLO ESTO) =================
+  // ======================================================
+  selectOrdenExistente.addEventListener("change", () => {
+    const idx = Number(selectOrdenExistente.value);
+    if (isNaN(idx)) return;
+
+    const ordenes = StorageApp.cargarOrdenes();
+    const o = ordenes[idx];
+    if (!o) return;
+
+    numOrdenEl.value = o.num || "";
+    textoRefEl.value = o.textoRef || "";
+    fechaVigenciaEl.value = o.vigencia || "";
+    fechaCaducidadInput.value = o.caducidad || "";
+
+    franjasEl.value = (o.franjas || [])
+      .map(f => `${f.horario} - ${f.lugar} - ${f.titulo}`)
+      .join("\n");
+  });
+
+  // ======================================================
+  // ===== UTIL UI ========================================
+  // ======================================================
   function actualizarSelector() {
     const ordenes = StorageApp.cargarOrdenes();
     selectOrdenExistente.innerHTML = "";
@@ -39,7 +62,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       selectOrdenExistente.appendChild(opt);
     });
 
-    if (!selectOrdenExistente.options.length) {
+    if (!selectOrdenExistente.options.length && infoOrdenEl) {
       infoOrdenEl.innerHTML = "";
     }
   }
@@ -60,7 +83,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     StorageApp.guardarOrdenes(filtradas);
   }
 
-  // ===== Parse franjas =====
+  // ======================================================
+  // ===== PARSE FRANJAS ==================================
+  // ======================================================
   function parseFranjas(raw) {
     const lines = String(raw || "")
       .split("\n")
@@ -92,7 +117,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       : { ok: false, error: "Debe existir al menos una franja válida" };
   }
 
-  // ===== PUBLICAR A SUPABASE (SIMPLE) =====
+  // ======================================================
+  // ===== PUBLICAR A SUPABASE =============================
+  // ======================================================
   async function publicarOrdenes() {
     try {
       const ordenes = StorageApp.cargarOrdenes();
@@ -116,21 +143,21 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
       if (!r.ok) {
         const t = await r.text();
-        console.error("SUPABASE ERROR:", r.status, t);
         alert("ERROR al publicar:\n" + t);
         return;
       }
 
       alert("ÓRDENES PUBLICADAS CORRECTAMENTE");
     } catch (e) {
-      console.error(e);
       alert("ERROR PUBLICAR:\n" + e.message);
     }
   }
 
   window.publicarOrdenes = publicarOrdenes;
 
-  // ===== Acciones locales =====
+  // ======================================================
+  // ===== ACCIONES =======================================
+  // ======================================================
   window.agregarOrden = function () {
     const num = numOrdenEl.value.trim();
     const textoRef = textoRefEl.value.trim();
@@ -172,6 +199,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
   window.eliminarOrden = function () {
     const idx = Number(selectOrdenExistente.value);
+    if (isNaN(idx)) return;
+
     const ordenes = StorageApp.cargarOrdenes();
     if (!ordenes[idx]) return;
 
@@ -198,11 +227,15 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     importBoxEl.value = "";
   };
 
-  // ===== Init =====
+  // ======================================================
+  // ===== INIT ===========================================
+  // ======================================================
   (function init() {
     limpiarOrdenesCaducadas();
     actualizarSelector();
   })();
 })();
+
+
 
 
