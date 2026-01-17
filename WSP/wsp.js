@@ -202,11 +202,7 @@ function enviar() {
     const prohibicion = document.getElementById("Prohibicion")?.value || 0;
     const cesion = document.getElementById("Cesion")?.value || 0;
     const detallesTexto = document.getElementById("detalles")?.value?.trim();
-    const bloqueDetalles = detallesTexto
-      ? `Detalles:
-    ${detallesTexto}
-    `
-      : "";
+    
     
     bloqueResultados =
 `Resultados:
@@ -275,6 +271,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
