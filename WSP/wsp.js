@@ -250,6 +250,7 @@ Personal Policial:
 ${seleccion("personal")}
 
 Móviles: ${seleccionLinea("movil", "/")}
+
 Elementos:
 Escopetas: ${seleccionLinea("ESCOPETA", "/")}
 HT: ${seleccionLinea("HT", "/")}
@@ -290,6 +291,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
