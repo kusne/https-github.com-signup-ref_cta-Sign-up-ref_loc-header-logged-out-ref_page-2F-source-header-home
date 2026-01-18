@@ -178,7 +178,16 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
   // ===== ENVIAR A WHATSAPP =====
 function enviar() {
-  if (!ordenSeleccionada || !franjaSeleccionada) return;
+  if (
+    !selTipo.value ||
+    !ordenSeleccionada ||
+    !franjaSeleccionada ||
+    !seleccion("personal") ||
+    !seleccion("movil")
+  ) {
+    alert("Complete todos los campos obligatorios");
+    return;
+  }
 
   const fecha = new Date().toLocaleDateString("es-AR");
 
@@ -278,6 +287,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
