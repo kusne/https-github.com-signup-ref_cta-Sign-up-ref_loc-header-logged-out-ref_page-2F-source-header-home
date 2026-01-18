@@ -178,16 +178,13 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
   // ===== ENVIAR A WHATSAPP =====
 function enviar() {
+  
+  if (!ordenSeleccionada || !franjaSeleccionada) return;
   const hayPersonal = document.querySelectorAll(".personal:checked").length > 0;
   const hayMovil = document.querySelectorAll(".movil:checked").length > 0;
-  if (
-    !selTipo.value ||
-    !ordenSeleccionada ||
-    !franjaSeleccionada ||
-    !seleccion("personal") ||
-    !seleccion("movil")
-  ) {
-    alert("Complete todos los campos obligatorios");
+
+  if (!hayPersonal || !hayMovil) {
+    alert("Debe seleccionar al menos un personal y un móvil");
     return;
   }
 
@@ -289,6 +286,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
