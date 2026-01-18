@@ -184,7 +184,7 @@ function enviar() {
   const fecha = new Date().toLocaleDateString("es-AR");
 
   let bloqueResultados = "";
-  
+  let bloqueDetalles = "";
   // ⬇️ SOLO si es FINALIZA agregamos los numerales
   if (selTipo.value === "FINALIZA") {
     const vehiculos = document.getElementById("vehiculos")?.value || 0;
@@ -202,15 +202,9 @@ function enviar() {
     const retencion = document.getElementById("Retencion")?.value || 0;
     const prohibicion = document.getElementById("Prohibicion")?.value || 0;
     const cesion = document.getElementById("Cesion")?.value || 0;
-    const detallesTexto = document.getElementById("detalles")?.value?.trim();
-    let bloqueDetalles = "";
-    if (detallesTexto) {
-      bloqueDetalles =
-    `Detalles:
-    ${detallesTexto}
-
-    `;
-    }
+    
+    
+    
     
     bloqueResultados =
 `Resultados:
@@ -231,8 +225,15 @@ Prohibición de circulación: (${prohibicion})
 Cesión de conducción: (${cesion})
 
 `;
-  }
+ const detallesTexto = document.getElementById("detalles")?.value?.trim();
 
+ if (detallesTexto) {
+    bloqueDetalles =
+`Detalles:
+${detallesTexto}
+`;
+  }
+}
   const texto =
 `POLICÍA DE LA PROVINCIA DE SANTA FE - GUARDIA PROVINCIAL
 BRIGADA MOTORIZADA CENTRO NORTE
@@ -279,6 +280,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
