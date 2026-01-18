@@ -180,13 +180,6 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 function enviar() {
   
   if (!ordenSeleccionada || !franjaSeleccionada) return;
-  const hayPersonal = document.querySelectorAll(".personal:checked").length > 0;
-  const hayMovil = document.querySelectorAll(".movil:checked").length > 0;
-
-  if (!hayPersonal || !hayMovil) {
-    alert("Debe seleccionar al menos un personal y un móvil");
-    return;
-  }
 
   const fecha = new Date().toLocaleDateString("es-AR");
 
@@ -286,6 +279,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
