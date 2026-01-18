@@ -250,6 +250,13 @@ Personal Policial:
 ${seleccion("personal")}
 
 Móviles: ${seleccionLinea("movil", "/")}
+Elementos:
+Escopetas: ${seleccionLinea("ESCOPETA", "/")}
+HT: ${seleccionLinea("HT", "/")}
+PDA: ${seleccionLinea("PDA", "/")}
+Impresoras: ${seleccionLinea("IMPRESORA", "/")}
+Alómetros: ${seleccionLinea("Alometro", "/")}
+Alcoholímetros: ${seleccionLinea("Alcoholimetro", "/")}
 
 
 
@@ -283,6 +290,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
