@@ -251,13 +251,7 @@ ${seleccion("personal")}
 
 Móviles: ${seleccionLinea("movil", "/")}
 
-Elementos :
-Escopetas : ${seleccionlinea("ESCOPETA","/")}
-HT : ${seleccionlinea("HT","/")}
-PDA : ${seleccionlinea("PDA","/")}
-Impresoras : ${seleccionlinea("IMPRESORA","/")}
-Alometros : ${seleccionlinea("Alometro","/")}
-Alcoholimetro : ${seleccionlinea("Alcoholimetro","/")}
+
 
 ${bloqueResultados}
 
@@ -289,6 +283,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
