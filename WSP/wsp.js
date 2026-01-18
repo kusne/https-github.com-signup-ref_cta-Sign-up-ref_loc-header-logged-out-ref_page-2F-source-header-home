@@ -184,7 +184,7 @@ function enviar() {
   const fecha = new Date().toLocaleDateString("es-AR");
 
   let bloqueResultados = "";
-  let bloqueDetalles = "";
+  let textoDetalles = "";
   // ⬇️ SOLO si es FINALIZA agregamos los numerales
   if (selTipo.value === "FINALIZA") {
     const vehiculos = document.getElementById("vehiculos")?.value || 0;
@@ -228,7 +228,7 @@ Cesión de conducción: (${cesion})
  const detallesTexto = document.getElementById("detalles")?.value?.trim();
 
  if (detallesTexto) {
-    bloqueDetalles =
+    textoDetalles =
 `Detalles:
 ${detallesTexto}
 `;
@@ -252,7 +252,7 @@ ${seleccion("personal")}
 Móviles: ${seleccionLinea("movil", "/")}
 
 ${bloqueResultados}
-${bloqueDetalles}
+${textoDetalles}
     
 Observaciones:
 ${document.getElementById("obs")?.value || "Sin novedad"}
@@ -280,6 +280,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
