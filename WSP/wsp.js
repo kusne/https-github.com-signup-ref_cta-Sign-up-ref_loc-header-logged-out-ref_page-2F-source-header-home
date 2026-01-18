@@ -178,6 +178,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
   // ===== ENVIAR A WHATSAPP =====
 function enviar() {
+  const hayPersonal = document.querySelectorAll(".personal:checked").length > 0;
+  const hayMovil = document.querySelectorAll(".movil:checked").length > 0;
   if (
     !selTipo.value ||
     !ordenSeleccionada ||
@@ -287,6 +289,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
