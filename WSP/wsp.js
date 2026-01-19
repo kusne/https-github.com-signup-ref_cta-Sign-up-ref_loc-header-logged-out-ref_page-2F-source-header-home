@@ -271,7 +271,9 @@ PDA: ${seleccionLinea("PDA", "/")}
 Impresoras: ${seleccionLinea("IMPRESORA", "/")}
 Alómetros: ${seleccionLinea("Alometro", "/")}
 Alcoholímetros: ${seleccionLinea("Alcoholimetro", "/")}
-${bloqueResultados}${textoDetalles}Observaciones:
+${bloqueResultados}
+${textoDetalles}
+Observaciones:
 ${document.getElementById("obs")?.value || "Sin novedad"}
 Se adjunta vista fotográfica`;
 
@@ -301,6 +303,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
