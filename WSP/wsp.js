@@ -278,6 +278,8 @@ ${document.getElementById("obs")?.value || "Sin novedad"}
 Se adjunta vista fotográfica`;
 
   const textoFinal = normalizarTextoWhatsApp(texto);
+  const textoFinal = texto.replace(/\n{2,}/g, "\n");
+
 
   window.location.href =
     "https://wa.me/?text=" + encodeURIComponent(textoFinal);
@@ -301,6 +303,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
