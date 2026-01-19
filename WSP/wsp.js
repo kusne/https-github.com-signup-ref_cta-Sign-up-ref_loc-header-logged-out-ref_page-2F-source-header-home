@@ -244,10 +244,8 @@ Remisión: (${remision})
 Retención: (${retencion})
 Prohibición de circulación: (${prohibicion})
 Cesión de conducción: (${cesion})
-
 `;
  const detallesTexto = document.getElementById("detalles")?.value?.trim();
-
  if (detallesTexto) {
     textoDetalles =
 `Detalles:
@@ -258,20 +256,14 @@ ${detallesTexto}
   const texto =
 `POLICÍA DE LA PROVINCIA DE SANTA FE - GUARDIA PROVINCIAL
 BRIGADA MOTORIZADA CENTRO NORTE
-
 TERCIO CHARLIE
-
 ${selTipo.value} ${franjaSeleccionada.titulo} ${ordenSeleccionada.num}
-
 Fecha: ${fecha}
 Horario: ${franjaSeleccionada.horario}
 Lugar: ${franjaSeleccionada.lugar}
-
 Personal Policial:
 ${seleccion("personal")}
-
 Móviles: ${seleccionLinea("movil", "/")}
-
 Elementos:
 Escopetas: ${seleccionLinea("ESCOPETA", "/")}
 HT: ${seleccionLinea("HT", "/")}
@@ -279,16 +271,10 @@ PDA: ${seleccionLinea("PDA", "/")}
 Impresoras: ${seleccionLinea("IMPRESORA", "/")}
 Alómetros: ${seleccionLinea("Alometro", "/")}
 Alcoholímetros: ${seleccionLinea("Alcoholimetro", "/")}
-
-
-
 ${bloqueResultados}
-
-${textoDetalles}
-    
+${textoDetalles} 
 Observaciones:
 ${document.getElementById("obs")?.value || "Sin novedad"}
-
 Se adjunta vista fotográfica`;
 
   const textoFinal = normalizarTextoWhatsApp(texto);
@@ -315,6 +301,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
