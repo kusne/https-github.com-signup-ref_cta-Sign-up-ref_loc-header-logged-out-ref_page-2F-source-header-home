@@ -229,21 +229,21 @@ function enviar() {
     
     bloqueResultados =
 `Resultados:
-Vehículos fiscalizados: (${vehiculos})
-Personas identificadas: (${personas})
+Vehículos Fiscalizados: (${vehiculos})
+Personas Identificadas: (${personas})
 Test de Alómetro: (${testalom})
 Test de Alcoholímetro: (${alco})
-Positiva sancionable: (${posSan})
-Positiva no sancionable: (${posNo})
-Actas labradas: (${actas})
+Positiva Sancionable: (${posSan})
+Positiva no Sancionable: (${posNo})
+Actas Labradas: (${actas})
 Requisas: (${requisa})
-QRZ: (${qrz})
+Qrz: (${qrz})
 Dominio: (${dominio})
-Medidas cautelares:
+Medidas Cautelares:
 Remisión: (${remision})
 Retención: (${retencion})
-Prohibición de circulación: (${prohibicion})
-Cesión de conducción: (${cesion})
+Prohibición de Circulación: (${prohibicion})
+Cesión de Conducción: (${cesion})
 `;
  const detallesTexto = document.getElementById("detalles")?.value?.trim();
  if (detallesTexto) {
@@ -302,6 +302,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
