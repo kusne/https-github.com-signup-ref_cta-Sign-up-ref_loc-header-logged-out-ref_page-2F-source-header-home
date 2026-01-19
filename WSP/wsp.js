@@ -257,7 +257,7 @@ ${detallesTexto}
 `Policia de la Provincia de Santa Fe - Guardia Provincial
 Brigada Motorizada Centro Norte
 Tercio Charly
-${selTipo.value} ${franjaSeleccionada.titulo} ${ordenSeleccionada.num}
+${selTipo.value.charAt(0) + selTipo.value.slice(1).toLowerCase()} ${franjaSeleccionada.titulo} ${ordenSeleccionada.num}
 Fecha: ${fecha}
 Horario: ${franjaSeleccionada.horario}
 Lugar: ${franjaSeleccionada.lugar}
@@ -302,6 +302,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
