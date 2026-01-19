@@ -277,7 +277,7 @@ Observaciones:
 ${document.getElementById("obs")?.value || "Sin novedad"}
 Se adjunta vista fotográfica`;
 
-  const textoFinal = normalizarTextoWhatsApp(texto);
+  
   const textoFinal = texto.replace(/\n{2,}/g, "\n");
 
 
@@ -303,6 +303,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
