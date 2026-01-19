@@ -274,8 +274,7 @@ Alcoholímetros: ${seleccionLinea("Alcoholimetro", "/")}
 ${bloqueResultados}
 ${textoDetalles}
 Observaciones:
-${document.getElementById("obs")?.value || "Sin novedad"}
-Se adjunta vista fotográfica`;
+${document.getElementById("obs")?.value || "Sin novedad"}`;
 
   
   const textoFinal = texto.replace(/\n{2,}/g, "\n");
@@ -303,6 +302,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
