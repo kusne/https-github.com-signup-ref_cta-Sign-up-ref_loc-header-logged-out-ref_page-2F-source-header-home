@@ -205,6 +205,7 @@ function enviar() {
   const fecha = new Date().toLocaleDateString("es-AR");
 
   let bloqueResultados = "";
+  let bloqueDetalles = "";
   let textoDetalles = "";
   // ⬇️ SOLO si es FINALIZA agregamos los numerales
   if (selTipo.value === "FINALIZA") {
@@ -247,7 +248,7 @@ Cesión de conducción: (${cesion})
 `;
  const detallesTexto = document.getElementById("detalles")?.value?.trim();
  if (detallesTexto) {
-    textoDetalles =
+    bloqueDetalles =
 `Detalles:
 ${detallesTexto}
 `;
@@ -271,9 +272,7 @@ PDA: ${seleccionLinea("PDA", "/")}
 Impresoras: ${seleccionLinea("IMPRESORA", "/")}
 Alómetros: ${seleccionLinea("Alometro", "/")}
 Alcoholímetros: ${seleccionLinea("Alcoholimetro", "/")}
-${bloqueResultados}
-${textoDetalles} 
-Observaciones:
+${bloqueResultados}${bloqueDetalles}Observaciones:
 ${document.getElementById("obs")?.value || "Sin novedad"}
 Se adjunta vista fotográfica`;
 
@@ -303,6 +302,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
