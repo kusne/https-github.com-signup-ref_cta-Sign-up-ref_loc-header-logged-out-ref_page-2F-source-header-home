@@ -254,9 +254,9 @@ ${detallesTexto}
   }
 }
   const texto =
-`POLICÍA DE LA PROVINCIA DE SANTA FE - GUARDIA PROVINCIAL
-BRIGADA MOTORIZADA CENTRO NORTE
-TERCIO CHARLIE
+`Policia de la Provincia de Santa Fe - Guardia Provincial
+Brigada Motorizada Centro Norte
+Tercio Charly
 ${selTipo.value} ${franjaSeleccionada.titulo} ${ordenSeleccionada.num}
 Fecha: ${fecha}
 Horario: ${franjaSeleccionada.horario}
@@ -266,8 +266,8 @@ ${seleccion("personal")}
 Móviles: ${seleccionLinea("movil", "/")}
 Elementos:
 Escopetas: ${seleccionLinea("ESCOPETA", "/")}
-HT: ${seleccionLinea("HT", "/")}
-PDA: ${seleccionLinea("PDA", "/")}
+Ht: ${seleccionLinea("HT", "/")}
+Pda: ${seleccionLinea("PDA", "/")}
 Impresoras: ${seleccionLinea("IMPRESORA", "/")}
 Alómetros: ${seleccionLinea("Alometro", "/")}
 Alcoholímetros: ${seleccionLinea("Alcoholimetro", "/")}
@@ -303,6 +303,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
