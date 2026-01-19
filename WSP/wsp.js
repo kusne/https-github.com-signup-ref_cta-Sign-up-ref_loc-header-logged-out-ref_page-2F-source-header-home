@@ -175,6 +175,27 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       .map(e => e.value);
     return v.length ? v.join(" " + sep + " ") : "/";
   }
+  function normalizarTextoWhatsApp(texto) {
+  return texto
+    // pasar todo a minúscula
+    .toLowerCase()
+
+    // quitar símbolos no permitidos
+    .replace(/[*_\-•—–]/g, "")
+    .replace(/[.]{2,}/g, ".")
+
+    // normalizar espacios
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+
+    // capitalizar inicio de oración
+    .replace(/(^|\n|\.\s+)([a-záéíóúñ])/g, (m, p1, p2) => {
+      return p1 + p2.toUpperCase();
+    })
+
+    .trim();
+}
+
 
   // ===== ENVIAR A WHATSAPP =====
 function enviar() {
@@ -270,8 +291,11 @@ ${document.getElementById("obs")?.value || "Sin novedad"}
 
 Se adjunta vista fotográfica`;
 
+  const textoFinal = normalizarTextoWhatsApp(texto);
+
   window.location.href =
-    "https://wa.me/?text=" + encodeURIComponent(texto);
+    "https://wa.me/?text=" + encodeURIComponent(textoFinal);
+
 }
 
 
@@ -291,6 +315,7 @@ Se adjunta vista fotográfica`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
