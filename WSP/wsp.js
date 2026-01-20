@@ -266,43 +266,18 @@ function haySeleccion(clase) {
 
   // ===== ENVIAR A WHATSAPP =====
   
-function enviar() {
-  // ===== Validaciones base (DOM) =====
-  if (!selTipo.value) {
-    alert("Debe seleccionar INICIA o FINALIZA.");
-    return;
-  }
-  if (selOrden.value === "") {
-    alert("Debe seleccionar una orden.");
-    return;
-  }
-  if (selHorario.value === "") {
-    alert("Debe seleccionar un horario.");
-    return;
-  }
+if (!ordenSeleccionada || !franjaSeleccionada) return;
+// ===== validación obligatoria personal y móvil (sin romper flujo) =====
+if (!seleccion("personal")) {
+  alert("Debe seleccionar personal policial.");
+  return;
+}
 
-  // ===== Obtener orden/franja en el momento del click (sin estado global) =====
-  const ordenes = StorageApp.cargarOrdenes();
-  const orden = ordenes?.[Number(selOrden.value)];
-  const franja = orden?.franjas?.[Number(selHorario.value)];
-
-  if (!orden || !franja) {
-    alert("La orden o el horario seleccionado no es válido. Volvé a seleccionar.");
-    return;
-  }
-
-  // ===== Obligatorios: Personal y Móvil =====
-  const cantPersonal = document.querySelectorAll(".personal:checked").length;
-  const cantMovil = document.querySelectorAll(".movil:checked").length;
-
-  if (cantPersonal === 0) {
-    alert("Debe seleccionar al menos un personal policial.");
-    return;
-  }
-  if (cantMovil === 0) {
-    alert("Debe seleccionar al menos un móvil.");
-    return;
-  }
+if (seleccionLinea("movil", "/") === "/") {
+  alert("Debe seleccionar al menos un móvil.");
+  return;
+}
+  
   const fecha = new Date().toLocaleDateString("es-AR");
 
   let bloqueResultados = "";
@@ -405,6 +380,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
