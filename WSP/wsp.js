@@ -267,16 +267,7 @@ function haySeleccion(clase) {
   // ===== ENVIAR A WHATSAPP =====
   
 if (!ordenSeleccionada || !franjaSeleccionada) return;
-// ===== validación obligatoria personal y móvil (sin romper flujo) =====
-if (!seleccion("personal")) {
-  alert("Debe seleccionar personal policial.");
-  return;
-}
 
-if (seleccionLinea("movil", "/") === "/") {
-  alert("Debe seleccionar al menos un móvil.");
-  return;
-}
   
   const fecha = new Date().toLocaleDateString("es-AR");
 
@@ -380,6 +371,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
