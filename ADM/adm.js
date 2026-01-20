@@ -298,18 +298,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       exportImportContainer.classList.toggle("hidden", !toggleExportImport.checked);
     });
   }
-  document.addEventListener("click", function (e) {
-    if (ordenSeleccionadaIdx === null) return;
-
-    // ¿el click fue sobre el selector de órdenes?
-    const clickEnOrden =
-      e.target === selectOrdenExistente ||
-      e.target.closest("#ordenExistente");
-
-    if (!clickEnOrden) {
-      limpiarCampos();
-    }
-  });
+  
 
 
   // ======================================================
@@ -330,6 +319,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     }
   })();
 })();
+
 
 
 
