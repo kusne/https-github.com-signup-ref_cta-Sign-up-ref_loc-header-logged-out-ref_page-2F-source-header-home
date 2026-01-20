@@ -59,7 +59,15 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   // ===== EVENTO SELECT ORDEN =============================
   // ======================================================
   selectOrdenExistente.addEventListener("change", () => {
-    const idx = Number(selectOrdenExistente.value);
+    const v = selectOrdenExistente.value;
+
+    // ✅ si el usuario dejó "sin selección" => nueva orden
+    if (v === "") {
+      limpiarCampos();
+      return;
+    }
+
+    const idx = Number(v);
     if (isNaN(idx)) return;
 
     const ordenes = StorageApp.cargarOrdenes();
@@ -84,6 +92,11 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   function actualizarSelector() {
     const ordenes = StorageApp.cargarOrdenes();
     selectOrdenExistente.innerHTML = "";
+    // ✅ opción vacía para permitir "sin selección"
+    const optVacio = document.createElement("option");
+    optVacio.value = "";
+    optVacio.text = ""; // si querés ver texto, poné: "-- nueva orden --"
+    selectOrdenExistente.appendChild(optVacio);
 
     ordenes.forEach((o, i) => {
       if (!o || !o.num) return;
@@ -92,6 +105,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       opt.text = `${o.num} ${o.textoRef || ""}`.trim();
       selectOrdenExistente.appendChild(opt);
     });
+    // ✅ dejar el select sin selección (modo nueva orden)
+    selectOrdenExistente.value = "";
 
     if (!selectOrdenExistente.options.length && infoOrdenEl) {
       infoOrdenEl.innerHTML = "";
@@ -319,6 +334,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     }
   })();
 })();
+
 
 
 
