@@ -351,7 +351,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     window.location.href =
       "https://wa.me/?text=" + encodeURIComponent(textoFinal);
   }, 0);
-
+ }
 
   // ===== Eventos =====
   elToggleCarga.addEventListener("change", toggleCargaOrdenes);
@@ -369,6 +369,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
