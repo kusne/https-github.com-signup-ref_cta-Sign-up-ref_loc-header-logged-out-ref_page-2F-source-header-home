@@ -262,11 +262,9 @@ function resetUI() {
 function haySeleccion(clase) {
   return document.querySelectorAll("." + clase + ":checked").length > 0;
 }
-
-
-  // ===== ENVIAR A WHATSAPP =====
-  
-if (!ordenSeleccionada || !franjaSeleccionada) return;
+// ===== ENVIAR A WHATSAPP =====
+function enviar() { 
+  if (!ordenSeleccionada || !franjaSeleccionada) return;
 
   
   const fecha = new Date().toLocaleDateString("es-AR");
@@ -371,6 +369,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
