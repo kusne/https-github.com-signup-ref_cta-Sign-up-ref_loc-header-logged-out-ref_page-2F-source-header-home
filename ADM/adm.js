@@ -82,52 +82,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     const filtradas = OrdersSync.filtrarCaducadas(ordenes);
     StorageApp.guardarOrdenes(filtradas);
   }
-  function normalizarTituloOperativo(txt) {
-    if (!txt) return "";
-
-    // Limpieza básica
-    let t = txt.trim();
-
-    // Pasar todo a minúscula primero
-    t = t.toLowerCase();
-
-    // Capitalizar cada palabra
-    t = t.replace(/\b\w/g, l => l.toUpperCase());
-
-    // Normalizar OP / O.P / OP. / etc → O.Op. 051/26
-    t = t.replace(
-      /\b(o\.?\s*op\.?|op)\s*0*(\d+\/\d+)\b/i,
-      "O.Op. $2"
-    );
-
-    return t;
-  }
-  //===== Formato de salida para LUGAR =======================
-  function normalizarLugar(txt) {
-    if (!txt) return "";
-
-    let t = txt.trim().toLowerCase();
-
-    // Capitalizar cada palabra
-    t = t.replace(/\b\w/g, l => l.toUpperCase());
-
-    return t;
-  }
-
-  //===== Formato de salida para HORARIO =======================
-  function normalizarHorario(txt) {
-    if (!txt) return "";
-
-    let t = txt
-      .toLowerCase()
-      .replace(/\s+/g, " ")
-      .trim();
-
-    // Capitalizar SOLO la palabra "finalizar"
-    t = t.replace(/\bfinalizar\b/g, "Finalizar");
-
-    return t;
-  }
+  
 
   // ======================================================
   // ===== PARSE FRANJAS ==================================
@@ -281,6 +236,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     actualizarSelector();
   })();
 })();
+
 
 
 
