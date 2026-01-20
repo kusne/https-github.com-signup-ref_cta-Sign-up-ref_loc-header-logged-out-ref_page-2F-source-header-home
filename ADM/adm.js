@@ -20,6 +20,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   const toggleExportImport = document.getElementById("toggleExportImport");
   const exportImportContainer = document.getElementById("exportImportContainer");
 
+
   // Botón publicar (visual). Si no existe o el id es distinto, el bloqueo igual se aplica por función.
   const btnPublicar = document.getElementById("btnPublicarOrdenes");
   
@@ -282,6 +283,12 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     // ✅ importar cuenta como “cargar orden” => habilita publicar
     marcarCambio();
   };
+  if (toggleExportImport && exportImportContainer) {
+    toggleExportImport.addEventListener("change", () => {
+      exportImportContainer.classList.toggle("hidden", !toggleExportImport.checked);
+    });
+  }
+
 
   // ======================================================
   // ===== INIT ===========================================
@@ -297,10 +304,11 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     // Estado inicial exportar / importar
     if (toggleExportImport && exportImportContainer) {
       toggleExportImport.checked = false;
-      exportImportContainer.style.display = "none";
+      exportImportContainer.classList.add("hidden");
     }
   })();
 })();
+
 
 
 
