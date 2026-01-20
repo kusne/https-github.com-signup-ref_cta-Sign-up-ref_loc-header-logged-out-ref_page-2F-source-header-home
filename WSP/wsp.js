@@ -265,8 +265,9 @@ function haySeleccion(clase) {
 
 
   // ===== ENVIAR A WHATSAPP =====
-function enviar() {
   
+function enviar() {
+  actualizarDatosFranja();
   if (!ordenSeleccionada || !franjaSeleccionada){
     alert("Debe seleccionar una orden y un horario.");
     return;
@@ -381,6 +382,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
