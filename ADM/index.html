@@ -29,8 +29,10 @@
 
   <div class="caducidad-container">
     <label for="fechaCaducidad">Fecha de Caducidad (obligatoria)</label>
-    <input type="text" id="fechaCaducidad" required placeholder="DD/MM/AAAA o A FINALIZAR">
-
+    <div class="fecha-caducidad-row">
+      <input type="text" id="fechaCaducidad" required placeholder="DD/MM/AAAA o A FINALIZAR">
+      <input type="date" id="fechaCaducidadPicker" title="Seleccionar fecha">
+  </div>
     <div class="checkbox-row">
       <label class="checkbox-container" for="aFinalizarCheckbox">
         <input type="checkbox" id="aFinalizarCheckbox">
@@ -90,6 +92,7 @@
   
 </body>
 </html>
+
 
 
 
