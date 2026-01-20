@@ -61,8 +61,9 @@
 
   <hr>
 
-  <h3>Exportar / Importar Órdenes</h3>
-
+  <h3><label style="cursor:pointer;"><input type="checkbox" id="toggleExportImport">Mostrar exportar / importar órdenes</label></h3>
+  <div id="exportImportContainer" style="display:none;">
+    
   <label for="exportBox">Exportar órdenes (copiar y enviar por WhatsApp)</label>
   <textarea id="exportBox" rows="6" readonly></textarea>
   <button type="button" onclick="exportarOrdenes()">Exportar</button>
@@ -90,6 +91,7 @@
   
 </body>
 </html>
+
 
 
 
