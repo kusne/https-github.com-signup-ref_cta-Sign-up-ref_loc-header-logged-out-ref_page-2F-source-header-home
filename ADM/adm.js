@@ -177,8 +177,10 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
         alert("ERROR al publicar:\n" + t);
         return;
       }
-      if (modo !== "eliminar") {
-        alert("ÓRDENES PUBLICADAS CORRECTAMENTE");
+      if (modo === "eliminar") {
+        alert("ORDEN ELIMINADA CORRECTAMENTE!");
+      } else {
+        alert("ÓRDENES PUBLICADAS CORRECTAMENTE!");
       }
       
 
@@ -293,6 +295,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     actualizarEstadoPublicar();
   })();
 })();
+
 
 
 
