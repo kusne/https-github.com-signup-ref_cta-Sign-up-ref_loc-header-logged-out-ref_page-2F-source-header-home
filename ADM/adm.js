@@ -149,7 +149,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
       const horario = m[1].trim();
       const lugar = m[2].trim();
-      const titulo = normalizarTituloOperativo(m[3].trim());
+      const titulo = m[3].trim();
 
       if (!horario || !lugar || !titulo) {
         return { ok: false, error: `Error en franja ${i + 1}: campos vacíos` };
@@ -281,6 +281,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     actualizarSelector();
   })();
 })();
+
 
 
 
