@@ -267,10 +267,26 @@ function haySeleccion(clase) {
   // ===== ENVIAR A WHATSAPP =====
   
 function enviar() {
-  actualizarDatosFranja();
-  if (!ordenSeleccionada || !franjaSeleccionada){
-    alert("Debe seleccionar una orden y un horario.");
+  if (!selTipo.value) {
+    alert("Debe seleccionar INICIA o FINALIZA.");
     return;
+  }
+
+  if (selOrden.value === "") {
+    alert("Debe seleccionar una orden.");
+    return;
+  }
+
+  if (selHorario.value === "") {
+    alert("Debe seleccionar un horario.");
+    return;
+  }
+
+  // ===== reconstrucción segura del estado =====
+  const ordenes = StorageApp.cargarOrdenes();
+  ordenSeleccionada = ordenes[Number(selOrden.value)];
+  franjaSeleccionada =
+    ordenSeleccionada.franjas[Number(selHorario.value)];
   }
   if (!haySeleccion("personal")) {
     alert("Debe seleccionar al menos un personal policial.");
@@ -382,6 +398,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
