@@ -345,10 +345,11 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
   // 🔹 RESET DE LA UI
   resetUI();
   // 🔹 ENVÍO A WHATSAPP
-  window.location.href =
-    "https://wa.me/?text=" + encodeURIComponent(textoFinal);
-
-}
+  // 🔹 permitir repaint antes de salir
+  setTimeout(() => {
+    window.location.href =
+      "https://wa.me/?text=" + encodeURIComponent(textoFinal);
+  }, 0);
 
 
   // ===== Eventos =====
@@ -367,6 +368,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
