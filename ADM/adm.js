@@ -18,6 +18,11 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   const exportBoxEl = document.getElementById("exportBox");
   const importBoxEl = document.getElementById("importBox");
 
+  const btnPublicar = document.getElementById("btnPublicarOrdenes");
+
+  // ===== Estado =====
+  let seAgregoOrden = false;
+
   // ===== Bind A FINALIZAR =====
   if (typeof CaducidadFinalizar !== "undefined") {
     CaducidadFinalizar.bindAFinalizar({
@@ -27,7 +32,15 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   }
 
   // ======================================================
-  // ===== EVENTO SELECT ORDEN (SOLO ESTO) =================
+  // ===== UTIL PUBLICAR ==================================
+  // ======================================================
+  function actualizarEstadoPublicar() {
+    if (!btnPublicar) return;
+    btnPublicar.disabled = !seAgregoOrden;
+  }
+
+  // ======================================================
+  // ===== EVENTO SELECT ORDEN ============================
   // ======================================================
   selectOrdenExistente.addEventListener("change", () => {
     const idx = Number(selectOrdenExistente.value);
@@ -82,8 +95,6 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     const filtradas = OrdersSync.filtrarCaducadas(ordenes);
     StorageApp.guardarOrdenes(filtradas);
   }
-  
-
 
   // ======================================================
   // ===== PARSE FRANJAS ==================================
@@ -123,6 +134,11 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   // ===== PUBLICAR A SUPABASE =============================
   // ======================================================
   async function publicarOrdenes() {
+    if (!seAgregoOrden) {
+      alert("Debe agregar orden");
+      return;
+    }
+
     try {
       const ordenes = StorageApp.cargarOrdenes();
 
@@ -150,6 +166,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       }
 
       alert("ÓRDENES PUBLICADAS CORRECTAMENTE");
+      seAgregoOrden = false;
+      actualizarEstadoPublicar();
+
     } catch (e) {
       alert("ERROR PUBLICAR:\n" + e.message);
     }
@@ -196,19 +215,31 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     StorageApp.guardarOrdenes(ordenes);
     actualizarSelector();
     limpiarCampos();
+
+    seAgregoOrden = true;
+    actualizarEstadoPublicar();
+
     alert("Orden guardada");
   };
 
-  window.eliminarOrden = function () {
+  window.eliminarOrden = async function () {
     const idx = Number(selectOrdenExistente.value);
     if (isNaN(idx)) return;
 
     const ordenes = StorageApp.cargarOrdenes();
     if (!ordenes[idx]) return;
 
+    const ok = confirm("¿Está seguro que desea eliminar?");
+    if (!ok) return;
+
     ordenes.splice(idx, 1);
     StorageApp.guardarOrdenes(ordenes);
     actualizarSelector();
+
+    seAgregoOrden = true;
+    actualizarEstadoPublicar();
+
+    await publicarOrdenes();
   };
 
   window.exportarOrdenes = () =>
@@ -227,6 +258,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     limpiarOrdenesCaducadas();
     actualizarSelector();
     importBoxEl.value = "";
+
+    seAgregoOrden = true;
+    actualizarEstadoPublicar();
   };
 
   // ======================================================
@@ -235,9 +269,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   (function init() {
     limpiarOrdenesCaducadas();
     actualizarSelector();
+    actualizarEstadoPublicar();
   })();
 })();
-
 
 
 
