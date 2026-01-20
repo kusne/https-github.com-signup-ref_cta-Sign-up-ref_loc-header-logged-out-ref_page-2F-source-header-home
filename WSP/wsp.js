@@ -264,12 +264,18 @@ function haySeleccion(clase) {
 }
 // ===== ENVIAR A WHATSAPP =====
 function enviar() { 
-  if (!ordenSeleccionada || !franjaSeleccionada) return;
+  if (!ordenSeleccionada || !franjaSeleccionada){
+    alert("Debe seleccionar la orden y horario.");
+    return;
+  }  
   if (!seleccion("personal")) {
     alert("Debe seleccionar personal policial.");
     return;
   }
-  
+  if (seleccionLinea("movil", "/") === "/") {
+    alert("Debe seleccionar al menos un móvil.");
+    return;
+  }
   const fecha = new Date().toLocaleDateString("es-AR");
 
   let bloqueResultados = "";
@@ -372,6 +378,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
