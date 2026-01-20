@@ -259,8 +259,8 @@ Brigada Motorizada Centro Norte
 Tercio Charly
 ${selTipo.value.charAt(0) + selTipo.value.slice(1).toLowerCase()} ${franjaSeleccionada.titulo} ${ordenSeleccionada.num}
 Fecha: ${fecha}
-Horario: ${franjaSeleccionada.horario}
-Lugar: ${franjaSeleccionada.lugar}
+Horario: ${normalizarHorario(franjaSeleccionada.horario)}
+Lugar: ${normalizarLugar(franjaSeleccionada.lugar)}
 Personal Policial:
 ${seleccion("personal")}
 Móviles: ${seleccionLinea("movil", "/")}
@@ -302,6 +302,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
