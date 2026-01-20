@@ -20,6 +20,14 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
   // Botón publicar (visual). Si no existe o el id es distinto, el bloqueo igual se aplica por función.
   const btnPublicar = document.getElementById("btnPublicarOrdenes");
+  // ===== CALENDARIO PARA FECHA CADUCIDAD (UN SOLO INPUT) =====
+  if (fechaCaducidadInput && fechaCaducidadInput.showPicker) {
+    fechaCaducidadInput.addEventListener("dblclick", () => {
+      // no abrir calendario si es A FINALIZAR
+      if (fechaCaducidadInput.value.toUpperCase() === "A FINALIZAR") return;
+      fechaCaducidadInput.showPicker();
+    });
+  }
 
   // ===== Estado de publicación por ciclo =====
   // Reglas:
@@ -295,6 +303,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     actualizarEstadoPublicar();
   })();
 })();
+
 
 
 
