@@ -195,6 +195,42 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
     .trim();
 }
+// ===== NORMALIZADORES DE SALIDA (SOLO WSP) =====
+function normalizarTituloOperativo(txt) {
+  if (!txt) return "";
+
+  let t = txt.toLowerCase().trim();
+
+  // Capitalizar palabras
+  t = t.replace(/\b\w/g, l => l.toUpperCase());
+
+  // Normalizar OP
+  t = t.replace(
+    /\b(o\.?\s*op\.?|op)\s*0*(\d+\/\d+)\b/i,
+    "O.Op. $2"
+  );
+
+  return t;
+}
+
+function normalizarLugar(txt) {
+  if (!txt) return "";
+  return txt
+    .toLowerCase()
+    .trim()
+    .replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function normalizarHorario(txt) {
+  if (!txt) return "";
+
+  let t = txt.toLowerCase().replace(/\s+/g, " ").trim();
+
+  // Solo Finalizar con mayúscula
+  t = t.replace(/\bfinalizar\b/g, "Finalizar");
+
+  return t;
+}
 
 
   // ===== ENVIAR A WHATSAPP =====
@@ -257,10 +293,11 @@ ${detallesTexto}
 `Policia de la Provincia de Santa Fe - Guardia Provincial
 Brigada Motorizada Centro Norte
 Tercio Charly
-${selTipo.value.charAt(0) + selTipo.value.slice(1).toLowerCase()} ${franjaSeleccionada.titulo} ${ordenSeleccionada.num}
+${selTipo.value.charAt(0) + selTipo.value.slice(1).toLowerCase()}
+${normalizarTituloOperativo(franjaSeleccionada.titulo)} ${ordenSeleccionada.num}
 Fecha: ${fecha}
-Horario: ${franjaSeleccionada.horario}
-Lugar: ${franjaSeleccionada.lugar}
+Horario: ${normalizarHorario(franjaSeleccionada.horario)}
+Lugar: ${normalizarLugar(franjaSeleccionada.lugar)}
 Personal Policial:
 ${seleccion("personal")}
 Móviles: ${seleccionLinea("movil", "/")}
@@ -302,6 +339,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
