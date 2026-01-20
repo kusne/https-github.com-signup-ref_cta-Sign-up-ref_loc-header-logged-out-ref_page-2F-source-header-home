@@ -30,7 +30,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   // - Al publicar OK, queda bloqueado otra vez hasta que exista un nuevo cambio.
   let cambiosId = 0;
   let ultimoPublicadoId = 0;
-
+  // ===== Estado edición =====
+  let ordenSeleccionadaIdx = null;
+  
   function marcarCambio() {
     cambiosId += 1;
     actualizarEstadoPublicar();
@@ -63,7 +65,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     const ordenes = StorageApp.cargarOrdenes();
     const o = ordenes[idx];
     if (!o) return;
-
+    // ✅ entra en modo edición
+    ordenSeleccionadaIdx = idx;
+    
     numOrdenEl.value = o.num || "";
     textoRefEl.value = o.textoRef || "";
     fechaVigenciaEl.value = o.vigencia || "";
@@ -102,7 +106,11 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     fechaCaducidadInput.readOnly = false;
     fechaCaducidadInput.value = "";
     chkFinalizar.checked = false;
+    // 🔴 salir del modo edición
+    ordenSeleccionadaIdx = null;
+    selectOrdenExistente.value = "";
   }
+  
 
   function limpiarOrdenesCaducadas() {
     const ordenes = StorageApp.cargarOrdenes();
@@ -229,15 +237,17 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
     const nueva = { num, textoRef, franjas: pf.franjas, caducidad, vigencia };
     const ordenes = StorageApp.cargarOrdenes();
-    const idx = ordenes.findIndex(o => o && o.num === num);
-
-    if (idx >= 0) ordenes[idx] = nueva;
-    else ordenes.push(nueva);
+    if (ordenSeleccionadaIdx !== null) {
+      ordenes[ordenSeleccionadaIdx] = nueva;
+    } else {
+      ordenes.push(nueva);
+    }
 
     StorageApp.guardarOrdenes(ordenes);
     actualizarSelector();
     limpiarCampos();
-
+    // 🔴 salir del modo edición
+    ordenSeleccionadaIdx = null;
     // ✅ habilita publicar (nuevo cambio)
     marcarCambio();
 
@@ -288,6 +298,18 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       exportImportContainer.classList.toggle("hidden", !toggleExportImport.checked);
     });
   }
+  document.addEventListener("click", function (e) {
+    if (ordenSeleccionadaIdx === null) return;
+
+    // ¿el click fue sobre el selector de órdenes?
+    const clickEnOrden =
+      e.target === selectOrdenExistente ||
+      e.target.closest("#ordenExistente");
+
+    if (!clickEnOrden) {
+      limpiarCampos();
+    }
+  });
 
 
   // ======================================================
@@ -308,6 +330,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     }
   })();
 })();
+
 
 
 
