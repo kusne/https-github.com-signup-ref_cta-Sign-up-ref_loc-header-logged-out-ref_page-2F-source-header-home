@@ -18,10 +18,29 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   const exportBoxEl = document.getElementById("exportBox");
   const importBoxEl = document.getElementById("importBox");
 
+  // Botón publicar (visual). Si no existe o el id es distinto, el bloqueo igual se aplica por función.
   const btnPublicar = document.getElementById("btnPublicarOrdenes");
 
-  // ===== Estado =====
-  let seAgregoOrden = false;
+  // ===== Estado de publicación por ciclo =====
+  // Reglas:
+  // - Solo se puede publicar si hubo AL MENOS 1 cambio desde la última publicación.
+  // - Al publicar OK, queda bloqueado otra vez hasta que exista un nuevo cambio.
+  let cambiosId = 0;
+  let ultimoPublicadoId = 0;
+
+  function marcarCambio() {
+    cambiosId += 1;
+    actualizarEstadoPublicar();
+  }
+
+  function puedePublicar() {
+    return cambiosId > ultimoPublicadoId;
+  }
+
+  function actualizarEstadoPublicar() {
+    if (!btnPublicar) return;
+    btnPublicar.disabled = !puedePublicar();
+  }
 
   // ===== Bind A FINALIZAR =====
   if (typeof CaducidadFinalizar !== "undefined") {
@@ -32,15 +51,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   }
 
   // ======================================================
-  // ===== UTIL PUBLICAR ==================================
-  // ======================================================
-  function actualizarEstadoPublicar() {
-    if (!btnPublicar) return;
-    btnPublicar.disabled = !seAgregoOrden;
-  }
-
-  // ======================================================
-  // ===== EVENTO SELECT ORDEN ============================
+  // ===== EVENTO SELECT ORDEN =============================
   // ======================================================
   selectOrdenExistente.addEventListener("change", () => {
     const idx = Number(selectOrdenExistente.value);
@@ -94,6 +105,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     const ordenes = StorageApp.cargarOrdenes();
     const filtradas = OrdersSync.filtrarCaducadas(ordenes);
     StorageApp.guardarOrdenes(filtradas);
+    // Ojo: esto NO cuenta como “cargar orden” para habilitar publicar.
   }
 
   // ======================================================
@@ -134,8 +146,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   // ===== PUBLICAR A SUPABASE =============================
   // ======================================================
   async function publicarOrdenes() {
-    if (!seAgregoOrden) {
-      alert("Debe agregar orden");
+    // ✅ Bloqueo real (aunque el botón no esté deshabilitado o el id sea distinto)
+    if (!puedePublicar()) {
+      alert("primero cargue orden");
       return;
     }
 
@@ -148,9 +161,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            "apikey": SUPABASE_ANON_KEY,
-            "Authorization": "Bearer " + SUPABASE_ANON_KEY,
-            "Prefer": "return=minimal"
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: "Bearer " + SUPABASE_ANON_KEY,
+            Prefer: "return=minimal"
           },
           body: JSON.stringify({
             payload: ordenes,
@@ -166,7 +179,9 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
       }
 
       alert("ÓRDENES PUBLICADAS CORRECTAMENTE");
-      seAgregoOrden = false;
+
+      // ✅ Vuelve a estado inicial: bloqueado hasta nuevo cambio
+      ultimoPublicadoId = cambiosId;
       actualizarEstadoPublicar();
 
     } catch (e) {
@@ -216,8 +231,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     actualizarSelector();
     limpiarCampos();
 
-    seAgregoOrden = true;
-    actualizarEstadoPublicar();
+    // ✅ habilita publicar (nuevo cambio)
+    marcarCambio();
 
     alert("Orden guardada");
   };
@@ -236,9 +251,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     StorageApp.guardarOrdenes(ordenes);
     actualizarSelector();
 
-    seAgregoOrden = true;
-    actualizarEstadoPublicar();
-
+    // ✅ cambio => habilita publicar, pero como tu requerimiento original era publicar automático al eliminar:
+    marcarCambio();
     await publicarOrdenes();
   };
 
@@ -259,8 +273,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     actualizarSelector();
     importBoxEl.value = "";
 
-    seAgregoOrden = true;
-    actualizarEstadoPublicar();
+    // ✅ importar cuenta como “cargar orden” => habilita publicar
+    marcarCambio();
   };
 
   // ======================================================
@@ -269,9 +283,15 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   (function init() {
     limpiarOrdenesCaducadas();
     actualizarSelector();
+
+    // ✅ Estado inicial bloqueado aunque existan órdenes guardadas
+    cambiosId = 0;
+    ultimoPublicadoId = 0;
     actualizarEstadoPublicar();
   })();
 })();
+
+
 
 
 
