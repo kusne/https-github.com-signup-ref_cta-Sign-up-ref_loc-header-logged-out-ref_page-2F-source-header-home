@@ -264,10 +264,8 @@ function haySeleccion(clase) {
 }
 // ===== ENVIAR A WHATSAPP =====
 function enviar() { 
-  if (!ordenSeleccionada || !franjaSeleccionada){
-    alert("Debe seleccionar la orden y horario.");
-    return;
-  }  
+  if (!ordenSeleccionada || !franjaSeleccionada)return;
+    
   if (!seleccion("personal")) {
     alert("Debe seleccionar personal policial.");
     return;
@@ -378,6 +376,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
