@@ -267,32 +267,39 @@ function haySeleccion(clase) {
   // ===== ENVIAR A WHATSAPP =====
   
 function enviar() {
+  // ===== Validaciones base (DOM) =====
   if (!selTipo.value) {
     alert("Debe seleccionar INICIA o FINALIZA.");
     return;
   }
-
   if (selOrden.value === "") {
     alert("Debe seleccionar una orden.");
     return;
   }
-
   if (selHorario.value === "") {
     alert("Debe seleccionar un horario.");
     return;
   }
 
-  // ===== reconstrucción segura del estado =====
+  // ===== Obtener orden/franja en el momento del click (sin estado global) =====
   const ordenes = StorageApp.cargarOrdenes();
-  ordenSeleccionada = ordenes[Number(selOrden.value)];
-  franjaSeleccionada =
-    ordenSeleccionada.franjas[Number(selHorario.value)];
+  const orden = ordenes?.[Number(selOrden.value)];
+  const franja = orden?.franjas?.[Number(selHorario.value)];
+
+  if (!orden || !franja) {
+    alert("La orden o el horario seleccionado no es válido. Volvé a seleccionar.");
+    return;
   }
-  if (!haySeleccion("personal")) {
+
+  // ===== Obligatorios: Personal y Móvil =====
+  const cantPersonal = document.querySelectorAll(".personal:checked").length;
+  const cantMovil = document.querySelectorAll(".movil:checked").length;
+
+  if (cantPersonal === 0) {
     alert("Debe seleccionar al menos un personal policial.");
     return;
   }
-  if (!haySeleccion("movil")) {
+  if (cantMovil === 0) {
     alert("Debe seleccionar al menos un móvil.");
     return;
   }
@@ -398,6 +405,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
