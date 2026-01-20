@@ -145,7 +145,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   // ======================================================
   // ===== PUBLICAR A SUPABASE =============================
   // ======================================================
-  async function publicarOrdenes() {
+  async function publicarOrdenes(modo) {
     // ✅ Bloqueo real (aunque el botón no esté deshabilitado o el id sea distinto)
     if (!puedePublicar()) {
       alert("primero cargue orden");
@@ -177,8 +177,10 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
         alert("ERROR al publicar:\n" + t);
         return;
       }
-
-      alert("ÓRDENES PUBLICADAS CORRECTAMENTE");
+      if (modo !== "eliminar") {
+        alert("ÓRDENES PUBLICADAS CORRECTAMENTE");
+      }
+      
 
       // ✅ Vuelve a estado inicial: bloqueado hasta nuevo cambio
       ultimoPublicadoId = cambiosId;
@@ -253,8 +255,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
     // ✅ cambio => habilita publicar, pero como tu requerimiento original era publicar automático al eliminar:
     marcarCambio();
-    await publicarOrdenes();
-    alert("Eliminación Publicada Correctamente");
+    await publicarOrdenes("eliminar");
+    alert("Orden Eliminada Correctamente");
   };
 
   window.exportarOrdenes = () =>
@@ -291,6 +293,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     actualizarEstadoPublicar();
   })();
 })();
+
 
 
 
