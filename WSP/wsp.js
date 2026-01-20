@@ -21,7 +21,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   // ===== Estado =====
   let ordenSeleccionada = null;
   let franjaSeleccionada = null;
-
+  let syncingOrdenes = false;
   // ======================================================
   // ===== LECTURA DESDE SUPABASE (FUENTE REAL) ============
   // ======================================================
@@ -52,6 +52,18 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
   }
 }
 
+async function syncAntesDeSeleccion() {
+  if (syncingOrdenes) return;
+  syncingOrdenes = true;
+
+  const ok = await syncOrdenesDesdeServidor();
+  if (ok) {
+    cargarOrdenesDisponibles();
+    limpiarSeleccionOrden();
+  }
+
+  syncingOrdenes = false;
+}
 
   // ===== UI =====
   function toggleCargaOrdenes() {
@@ -363,10 +375,12 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
   // ===== Eventos =====
   elToggleCarga.addEventListener("change", toggleCargaOrdenes);
   btnCargarOrdenes.addEventListener("click", importarOrdenes);
+  selOrden.addEventListener("focus", syncAntesDeSeleccion);
   selOrden.addEventListener("change", cargarHorariosOrden);
   selHorario.addEventListener("change", actualizarDatosFranja);
   selTipo.addEventListener("change", actualizarTipo);
   btnEnviar.addEventListener("click", enviar);
+  
 
   // ===== Init =====
   (async function init() {
@@ -376,6 +390,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
