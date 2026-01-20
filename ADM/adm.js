@@ -23,7 +23,16 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
   // Botón publicar (visual). Si no existe o el id es distinto, el bloqueo igual se aplica por función.
   const btnPublicar = document.getElementById("btnPublicarOrdenes");
-  
+  const bloqueOrdenes = document.getElementById("bloqueOrdenesCargadas");
+
+  bloqueOrdenes.addEventListener("click", function (e) {
+    // si el click fue sobre el select o una option, no hacemos nada
+    if (e.target.closest("#ordenExistente")) return;
+
+    // click en zona vacía → salir de edición
+    limpiarCampos();
+  });
+
   // ===== Estado de publicación por ciclo =====
   // Reglas:
   // - Solo se puede publicar si hubo AL MENOS 1 cambio desde la última publicación.
@@ -343,6 +352,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     }
   })();
 })();
+
 
 
 
