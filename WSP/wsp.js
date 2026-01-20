@@ -231,6 +231,34 @@ function normalizarHorario(txt) {
 
   return t;
 }
+function resetUI() {
+  // estado interno
+  ordenSeleccionada = null;
+  franjaSeleccionada = null;
+
+  // selects
+  selTipo.value = "";
+  selOrden.value = "";
+  selHorario.innerHTML = '<option value="">Seleccionar horario</option>';
+
+  // checkboxes
+  document
+    .querySelectorAll('input[type="checkbox"]')
+    .forEach(c => (c.checked = false));
+
+  // inputs numéricos y textos
+  document
+    .querySelectorAll('input[type="number"], input[type="text"], textarea')
+    .forEach(i => (i.value = ""));
+
+  // observaciones default
+  const obs = document.getElementById("obs");
+  if (obs) obs.value = "";
+
+  // ocultar bloques dependientes
+  divFinaliza.classList.add("hidden");
+  divDetalles.classList.add("hidden");
+}
 
 
   // ===== ENVIAR A WHATSAPP =====
@@ -314,8 +342,9 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
 
   
   const textoFinal = texto.replace(/\n{2,}/g, "\n");
-
-
+  // 🔹 RESET DE LA UI
+  resetUI();
+  // 🔹 ENVÍO A WHATSAPP
   window.location.href =
     "https://wa.me/?text=" + encodeURIComponent(textoFinal);
 
@@ -338,6 +367,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
