@@ -316,8 +316,8 @@ Cesión de Conducción: (${cesion})
 `Detalles:
 ${detallesTexto}
 `;
+    }
   }
-}
   const texto =
 `Policia de la Provincia de Santa Fe - Guardia Provincial
 Brigada Motorizada Centro Norte
@@ -369,6 +369,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
