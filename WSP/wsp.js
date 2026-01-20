@@ -259,13 +259,26 @@ function resetUI() {
   divFinaliza.classList.add("hidden");
   divDetalles.classList.add("hidden");
 }
+function haySeleccion(clase) {
+  return document.querySelectorAll("." + clase + ":checked").length > 0;
+}
 
 
   // ===== ENVIAR A WHATSAPP =====
 function enviar() {
   
-  if (!ordenSeleccionada || !franjaSeleccionada) return;
-
+  if (!ordenSeleccionada || !franjaSeleccionada){
+    alert("Debe seleccionar una orden y un horario.");
+    return;
+  }
+  if (!haySeleccion("personal")) {
+    alert("Debe seleccionar al menos un personal policial.");
+    return;
+  }
+  if (!haySeleccion("movil")) {
+    alert("Debe seleccionar al menos un móvil.");
+    return;
+  }
   const fecha = new Date().toLocaleDateString("es-AR");
 
   let bloqueResultados = "";
@@ -368,6 +381,7 @@ ${document.getElementById("obs")?.value || "Sin novedad"}`;
     cargarOrdenesDisponibles();
   })();
 })();
+
 
 
 
