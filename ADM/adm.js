@@ -17,6 +17,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
 
   const exportBoxEl = document.getElementById("exportBox");
   const importBoxEl = document.getElementById("importBox");
+  const toggleExportImport = document.getElementById("toggleExportImport");
+  const exportImportContainer = document.getElementById("exportImportContainer");
 
   // Botón publicar (visual). Si no existe o el id es distinto, el bloqueo igual se aplica por función.
   const btnPublicar = document.getElementById("btnPublicarOrdenes");
@@ -292,8 +294,14 @@ const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
     cambiosId = 0;
     ultimoPublicadoId = 0;
     actualizarEstadoPublicar();
+    // Estado inicial exportar / importar
+    if (toggleExportImport && exportImportContainer) {
+      toggleExportImport.checked = false;
+      exportImportContainer.style.display = "none";
+    }
   })();
 })();
+
 
 
 
