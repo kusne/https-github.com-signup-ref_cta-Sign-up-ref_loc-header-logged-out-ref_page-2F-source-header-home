@@ -27,15 +27,15 @@ const supabaseClient = window.supabase.createClient(
 
   // Botón publicar (visual). Si no existe o el id es distinto, el bloqueo igual se aplica por función.
   const btnPublicar = document.getElementById("btnPublicarOrdenes");
-  const bloqueOrdenes = document.getElementById("bloqueOrdenesCargadas");
+  //const bloqueOrdenes = document.getElementById("bloqueOrdenesCargadas");
 
-  bloqueOrdenes.addEventListener("click", function (e) {
+  //bloqueOrdenes.addEventListener("click", function (e) {
     // si el click fue sobre el select o una option, no hacemos nada
-    if (e.target.closest("#ordenExistente")) return;
+    //if (e.target.closest("#ordenExistente")) return;
 
     // click en zona vacía → salir de edición
-    limpiarCampos();
-  });
+    //limpiarCampos();
+  //});
 
   // ===== Estado de publicación por ciclo =====
   // Reglas:
@@ -356,6 +356,7 @@ const supabaseClient = window.supabase.createClient(
     }
   })();
 })();
+
 
 
 
