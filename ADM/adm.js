@@ -1,7 +1,7 @@
 // ===== CONFIG SUPABASE (SOLO ADM - SIMPLE) =====
 const SUPABASE_URL = "https://ugeydxozfewzhldjbkat.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_ZeLC2rOxhhUXlQdvJ28JkA_qf802-pX";
-const supabase = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
@@ -356,6 +356,7 @@ const supabase = window.supabase.createClient(
     }
   })();
 })();
+
 
 
 
