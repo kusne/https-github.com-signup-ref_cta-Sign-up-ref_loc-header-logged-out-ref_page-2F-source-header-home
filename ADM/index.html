@@ -10,7 +10,22 @@
 </head>
 
 <body>
-  <div class="app">
+  <!-- LOGIN ADM -->
+  <div id="loginContainer" style="max-width:320px; margin:40px auto; display:none;">
+    <h3>Acceso Administrador</h3>
+
+    <label>Email</label>
+    <input type="email" id="loginEmail">
+
+    <label>Contraseña</label>
+    <input type="password" id="loginPassword">
+
+    <button type="button" id="btnLogin">Ingresar</button>
+
+    <p id="loginError" style="color:red; display:none;"></p>
+  </div>
+
+  <div class="app" id="admContainer" style="display:none;">
   <h2>Formulario de Carga de Órdenes Operacionales</h2>
 
   <label for="numOrden">Número de Orden</label>
@@ -91,6 +106,7 @@
 </div>  
 </body>
 </html>
+
 
 
 
