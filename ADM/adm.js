@@ -161,7 +161,7 @@ const supabaseClient = window.supabase.createClient(
 
   window.publicarOrdenes = publicarOrdenes;
 
-  (function init() {
+  function init() {
     limpiarOrdenesCaducadas();
     actualizarSelector();
     cambiosId = 0;
@@ -170,6 +170,7 @@ const supabaseClient = window.supabase.createClient(
   })();
 
 })();
+
 
 
 
