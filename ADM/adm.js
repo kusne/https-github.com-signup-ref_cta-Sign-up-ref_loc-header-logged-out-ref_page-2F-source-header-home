@@ -6,6 +6,13 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
+// ===== COMPATIBILIDAD ONCLICK (evita "is not defined") =====
+window.agregarOrden = window.agregarOrden || function () {
+  alert("ADM aún no inicializó. Recargá con Ctrl+F5.");
+};
+window.publicarOrdenes = window.publicarOrdenes || function () {
+  alert("ADM aún no inicializó. Recargá con Ctrl+F5.");
+};
 
 // ======================================================
 // TODO EL CÓDIGO DEPENDIENTE DEL DOM VA ACÁ
@@ -179,6 +186,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // AGREGAR / ACTUALIZAR ORDEN (RESTAURADO)
   // ======================================================
   function agregarOrden() {
+    window.agregarOrden = agregarOrden;
+
     // defensivo
     if (typeof StorageApp === "undefined" || !StorageApp.cargarOrdenes || !StorageApp.guardarOrdenes) {
       alert("Error: StorageApp no está disponible. Revisá que se cargue el script de Storage.");
@@ -269,6 +278,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // PUBLICAR ÓRDENES (TU CÓDIGO, SE RESPETA)
   // ======================================================
   async function publicarOrdenes() {
+    window.publicarOrdenes = publicarOrdenes;
+
     if (!puedePublicar()) {
       alert("Primero cargue una orden");
       return;
@@ -416,6 +427,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.limpiarCampos = limpiarCampos;
 
 });
+
 
 
 
