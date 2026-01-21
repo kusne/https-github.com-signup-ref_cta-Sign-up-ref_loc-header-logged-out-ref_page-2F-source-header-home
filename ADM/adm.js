@@ -71,33 +71,34 @@ const supabaseClient = window.supabase.createClient(
   // ======================================================
   // ===== EVENTO SELECT ORDEN =============================
   // ======================================================
-  selectOrdenExistente.addEventListener("change", () => {
-    const v = selectOrdenExistente.value;
+  if (selectOrdenExistente) {
+    selectOrdenExistente.addEventListener("change", () => {
+      const v = selectOrdenExistente.value;
 
-    // ✅ si el usuario dejó "sin selección" => nueva orden
-    if (v === "") {
-      limpiarCampos();
-      return;
-    }
+      // ✅ si el usuario dejó "sin selección" => nueva orden
+      if (v === "") {
+        limpiarCampos();
+        return;
+      }
 
-    const idx = Number(v);
-    if (isNaN(idx)) return;
+      const idx = Number(v);
+      if (isNaN(idx)) return;
 
-    const ordenes = StorageApp.cargarOrdenes();
-    const o = ordenes[idx];
-    if (!o) return;
-    // ✅ entra en modo edición
-    ordenSeleccionadaIdx = idx;
+      const ordenes = StorageApp.cargarOrdenes();
+      const o = ordenes[idx];
+      if (!o) return;
+      // ✅ entra en modo edición
+      ordenSeleccionadaIdx = idx;
     
-    numOrdenEl.value = o.num || "";
-    textoRefEl.value = o.textoRef || "";
-    fechaVigenciaEl.value = o.vigencia || "";
-    fechaCaducidadInput.value = o.caducidad || "";
+      numOrdenEl.value = o.num || "";
+      textoRefEl.value = o.textoRef || "";
+      fechaVigenciaEl.value = o.vigencia || "";
+      fechaCaducidadInput.value = o.caducidad || "";
 
-    franjasEl.value = (o.franjas || [])
-      .map(f => `${f.horario} - ${f.lugar} - ${f.titulo}`)
-      .join("\n");
-  });
+      franjasEl.value = (o.franjas || [])
+        .map(f => `${f.horario} - ${f.lugar} - ${f.titulo}`)
+        .join("\n");
+    });
 
   // ======================================================
   // ===== UTIL UI ========================================
@@ -356,6 +357,7 @@ const supabaseClient = window.supabase.createClient(
     }
   })();
 })();
+
 
 
 
